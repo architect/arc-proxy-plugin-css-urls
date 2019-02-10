@@ -1,20 +1,20 @@
 let css = require('css')
 /**
- * arc-proxy-plugin-urls
+ * @architect/proxy-plugin-css-urls
  *
- * prepends mjs import declarations with /staging or /production
+ * prepends @import url paths with /staging or /production
  *
  * // input
- * import foo from '/bar'
+ * @import '/bar.css';
  *
  * // output
- * import foo from '/staging/bar'
+ * @import '/staging/bar.css';
  *
  * @param Key - the requested S3 Key
  * @param File - the file contents {headers, body}
  * @returns File - the processed file contents {header, body}
  */
-module.exports = function mjs(Key, {headers, body}) {
+module.exports = function prefixImport(Key, {headers, body}) {
   if (process.env.NODE_ENV === 'testing')
     return {headers, body}
   let prefix
